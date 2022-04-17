@@ -23,7 +23,6 @@ public class PiecesDao {
             statement.setString(1, targetPosition);
             statement.setString(2, currentPosition);
             statement.setInt(3, boardId);
-            statement.execute();
         });
         CommonDao.CreateUpdateDelete(sql, statementMaker);
     }
@@ -32,7 +31,6 @@ public class PiecesDao {
         final String sql = "DELETE FROM pieces WHERE position=?;";
         final StatementMaker<PreparedStatement> statementMaker = (statement -> {
             statement.setString(1, position);
-            statement.execute();
         });
         CommonDao.CreateUpdateDelete(sql, statementMaker);
     }
@@ -41,7 +39,6 @@ public class PiecesDao {
         final String sql = "DELETE FROM pieces WHERE board_id=?;";
         final StatementMaker<PreparedStatement> statementMaker = (statement -> {
             statement.setInt(1, boardId);
-            statement.execute();
         });
         CommonDao.CreateUpdateDelete(sql, statementMaker);
     }
