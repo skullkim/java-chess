@@ -14,6 +14,8 @@ import spark.Route;
 
 public class WebChessService {
 
+    private static final ChessController chess = new ChessController();
+
     public static final Route renderMainPage = (req, res) -> {
         Map<String, Object> model = new HashMap<>();
         return ViewUtil.render(model, "/index.html");
@@ -21,7 +23,6 @@ public class WebChessService {
 
     public static final Route findUserHistory = (req, res) -> {
         final String userName = req.params(":userName");
-        final ChessController chess = new ChessController();
         final int userId = chess.initGame(userName);
         final PiecesDto pieces = chess.getCurrentBoardState(userId);
         req.session().attribute("user-id", userId);
