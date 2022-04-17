@@ -38,8 +38,7 @@ public class CommonDao {
     }
 
     static void CreateUpdateDelete(final String sql, StatementMaker<PreparedStatement> statementConsumer) {
-        try {
-            final Connection connection = getConnection();
+        try (final Connection connection = getConnection()) {
             final PreparedStatement statement = connection.prepareStatement(sql);
             statementConsumer.makeStatement(statement);
             statement.execute();
@@ -51,8 +50,7 @@ public class CommonDao {
 
     static int findId(final String sql, final StatementMaker<PreparedStatement> statementMaker,
                       final String columnLabel) {
-        try {
-            final Connection connection = getConnection();
+        try (final Connection connection = getConnection()) {
             final PreparedStatement statement = connection.prepareStatement(sql);
             statementMaker.makeStatement(statement);
             final ResultSet resultSet = statement.executeQuery();
@@ -67,8 +65,7 @@ public class CommonDao {
     }
 
     static GameState getGameStatus(final String sql, final StatementMaker<PreparedStatement> statementMaker) {
-        try {
-            final Connection connection = CommonDao.getConnection();
+        try (final Connection connection = CommonDao.getConnection()) {
             final PreparedStatement statement = connection.prepareStatement(sql);
             statementMaker.makeStatement(statement);
             final ResultSet resultSet = statement.executeQuery();
@@ -85,8 +82,7 @@ public class CommonDao {
 
 
     static Map<Position, Piece> getPieces(final String sql, final StatementMaker<PreparedStatement> statementMaker) {
-        try {
-            final Connection connection = CommonDao.getConnection();
+        try (final Connection connection = CommonDao.getConnection()) {
             final PreparedStatement statement = connection.prepareStatement(sql);
             statementMaker.makeStatement(statement);
             final ResultSet resultSet = statement.executeQuery();
