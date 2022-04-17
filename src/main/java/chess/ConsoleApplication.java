@@ -1,6 +1,5 @@
 package chess;
 
-import chess.Controller.ChessController;
 import chess.Controller.command.Command;
 import chess.Controller.command.ParsedCommand;
 import chess.Controller.dto.PiecesDto;
@@ -8,10 +7,11 @@ import chess.Controller.dto.ScoreDto;
 import chess.Controller.dto.StateDto;
 import chess.console.view.InputView;
 import chess.console.view.OutputView;
+import chess.service.ChessService;
 
 public class ConsoleApplication {
 
-    private static final ChessController chess = new ChessController();
+    private static final ChessService chess = new ChessService();
 
     public static void main(String[] args) {
         try {
@@ -44,7 +44,7 @@ public class ConsoleApplication {
         return stateDto.getState().equals("END");
     }
 
-    private static void repeatTurn(final ChessController chess, final int userId) {
+    private static void repeatTurn(final ChessService chess, final int userId) {
         try {
             operateOnce(chess, userId);
         } catch (IllegalArgumentException e) {
@@ -53,7 +53,7 @@ public class ConsoleApplication {
         }
     }
 
-    private static void operateOnce(final ChessController chessController, final int userId) {
+    private static void operateOnce(final ChessService chessController, final int userId) {
         final ParsedCommand parsedCommand = new ParsedCommand(InputView.input());
         if (isCommandRelatedToScore(parsedCommand)) {
             final ScoreDto scoreDto = chessController.doActionAboutScore(parsedCommand, userId);

@@ -1,4 +1,4 @@
-package chess.Controller;
+package chess.service;
 
 import chess.Controller.command.ParsedCommand;
 import chess.Controller.command.PieceCommandFactory;
@@ -16,14 +16,14 @@ import chess.domain.piece.Piece;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class ChessController {
+public class ChessService {
 
     private final BoardDao boardDao;
     private final PiecesDao piecesDao;
     private final UserDao userDao;
 
 
-    public ChessController() {
+    public ChessService() {
         this.boardDao = new BoardDao();
         this.piecesDao = new PiecesDao();
         this.userDao = new UserDao();

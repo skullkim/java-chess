@@ -8,7 +8,7 @@ import static spark.Spark.port;
 import static spark.Spark.put;
 import static spark.Spark.staticFileLocation;
 
-import chess.service.WebChessService;
+import chess.Controller.WebChessController;
 import chess.util.path.Web;
 import com.google.gson.Gson;
 import java.util.HashMap;
@@ -29,15 +29,15 @@ public class WebApplication {
             staticFileLocation("/static");
         }
 
-        get(Web.MAIN_PAGE, WebChessService.renderMainPage);
+        get(Web.MAIN_PAGE, WebChessController.renderMainPage);
 
-        get(Web.USER_HISTORY, WebChessService.findUserHistory);
+        get(Web.USER_HISTORY, WebChessController.findUserHistory);
 
         path(Web.COMMAND_ACTION, () -> {
-            put(Web.START, WebChessService.startCommand);
-            put(Web.STATUS, WebChessService.statusCommand);
-            put(Web.MOVE, WebChessService.moveCommand);
-            put(Web.END, WebChessService.endCommand);
+            put(Web.START, WebChessController.startCommand);
+            put(Web.STATUS, WebChessController.statusCommand);
+            put(Web.MOVE, WebChessController.moveCommand);
+            put(Web.END, WebChessController.endCommand);
         });
 
         exception(IllegalArgumentException.class, (exception, request, response) -> {

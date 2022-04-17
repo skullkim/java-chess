@@ -1,10 +1,10 @@
-package chess.service;
+package chess.Controller;
 
-import chess.Controller.ChessController;
 import chess.Controller.command.Command;
 import chess.Controller.command.ParsedCommand;
 import chess.Controller.dto.PiecesDto;
 import chess.Controller.dto.ScoreDto;
+import chess.service.ChessService;
 import chess.util.ViewUtil;
 import chess.util.json.JsonParser;
 import java.util.HashMap;
@@ -12,9 +12,9 @@ import java.util.Map;
 import spark.Request;
 import spark.Route;
 
-public class WebChessService {
+public class WebChessController {
 
-    private static final ChessController chess = new ChessController();
+    private static final ChessService chess = new ChessService();
 
     public static final Route renderMainPage = (req, res) -> {
         Map<String, Object> model = new HashMap<>();
@@ -44,7 +44,7 @@ public class WebChessService {
     }
 
     private static String doCommandActionAboutScore(final int userId, final ParsedCommand parsedCommand) {
-        final ChessController chess = new ChessController();
+        final ChessService chess = new ChessService();
         final ScoreDto scoreDto = chess.doActionAboutScore(parsedCommand, userId);
         final String responseObject = JsonParser.scoreToJson(scoreDto);
         if (parsedCommand.getCommand() == Command.END) {
@@ -75,7 +75,7 @@ public class WebChessService {
     }
 
     private static String doCommandActionAboutPieces(final int userId, final ParsedCommand parsedCommand) {
-        final ChessController chess = new ChessController();
+        final ChessService chess = new ChessService();
         final PiecesDto piecesDto = chess.doActionAboutPieces(parsedCommand, userId);
         if (parsedCommand.getCommand() == Command.MOVE) {
             return JsonParser.getPiecesAndGameStatus(piecesDto);
