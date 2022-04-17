@@ -11,6 +11,8 @@ import chess.console.view.OutputView;
 
 public class ConsoleApplication {
 
+    private static final ChessController chess = new ChessController();
+
     public static void main(String[] args) {
         try {
             startGame();
@@ -21,7 +23,6 @@ public class ConsoleApplication {
 
     private static void startGame() {
         final String userName = InputView.inputName();
-        final ChessController chess = new ChessController();
         final int userId = chess.initGame(userName);
         StateDto state = chess.getCurrentStatus(userId);
         if (!isReady(state)) {
