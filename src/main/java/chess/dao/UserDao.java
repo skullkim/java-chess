@@ -9,6 +9,7 @@ public class UserDao {
         final StatementMaker<PreparedStatement> statementMaker = (statement) -> {
             statement.setString(1, name);
             statement.setInt(2, boardId);
+            statement.execute();
         };
         CommonDao.CreateUpdateDelete(sql, statementMaker);
     }
@@ -33,6 +34,7 @@ public class UserDao {
         final String sql = "DELETE FROM user WHERE id=?";
         final StatementMaker<PreparedStatement> statementMaker = (statement -> {
             statement.setInt(1, userId);
+            statement.execute();
         });
         CommonDao.CreateUpdateDelete(sql, statementMaker);
     }

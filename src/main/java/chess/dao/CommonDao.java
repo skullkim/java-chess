@@ -41,7 +41,6 @@ public class CommonDao {
         try (final Connection connection = getConnection()) {
             final PreparedStatement statement = connection.prepareStatement(sql);
             statementConsumer.makeStatement(statement);
-            statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(INVALID_COMMAND, e);

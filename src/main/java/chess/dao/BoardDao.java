@@ -17,6 +17,7 @@ public class BoardDao {
                 statement.setInt(1, positionAndPieceId.getValue());
                 statement.setString(2, positionAndPieceId.getKey());
                 statement.setInt(3, boardId);
+                statement.execute();
             }
         });
         CommonDao.CreateUpdateDelete(sql, statementMaker);
@@ -48,6 +49,7 @@ public class BoardDao {
         final StatementMaker<PreparedStatement> statementMaker = (statement -> {
             statement.setString(1, gameStatus);
             statement.setInt(2, boardId);
+            statement.execute();
         });
         CommonDao.CreateUpdateDelete(sql, statementMaker);
     }
@@ -56,6 +58,7 @@ public class BoardDao {
         final String sql = "DELETE FROM board WHERE id=?;";
         final StatementMaker<PreparedStatement> statementMaker = (statement -> {
             statement.setInt(1, id);
+            statement.execute();
         });
         CommonDao.CreateUpdateDelete(sql, statementMaker);
     }
