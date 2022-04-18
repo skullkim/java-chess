@@ -1,17 +1,15 @@
 package chess.dao;
 
-import chess.dao.initialboard.InitialBoard;
 import chess.domain.GameState;
 import java.sql.PreparedStatement;
 import java.util.Map;
 
 public class BoardDao {
 
-    public int initBoard() {
+    public int initBoard(final Map<String, Integer> pieces) {
         final String sql = "INSERT INTO pieces(piece_id, position, board_id) VALUES (?, ?, ?);";
         createNewBoard();
         final int boardId = getLastCreatedBoardId();
-        final Map<String, Integer> pieces = InitialBoard.getInitialPiecesIdAndLocation();
         final StatementMaker<PreparedStatement> statementMaker = (statement -> {
             for (Map.Entry<String, Integer> positionAndPieceId : pieces.entrySet()) {
                 statement.setInt(1, positionAndPieceId.getValue());

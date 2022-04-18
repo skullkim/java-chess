@@ -3,6 +3,7 @@ package chess.dao;
 import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import chess.dao.initialboard.InitialBoard;
 import chess.domain.GameState;
 import java.sql.Connection;
 import org.junit.jupiter.api.DisplayName;
@@ -23,7 +24,7 @@ class BoardDaoTest {
     @DisplayName("보드 초기화를 수행한다.")
     void init_Board() {
         final BoardDao boardDao = new BoardDao();
-        final int boardId = boardDao.initBoard();
+        final int boardId = boardDao.initBoard(InitialBoard.getInitialPiecesIdAndLocation());
         assertThat(boardId).isGreaterThan(1);
     }
 

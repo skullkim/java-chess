@@ -9,6 +9,7 @@ import chess.Controller.dto.StateDto;
 import chess.dao.BoardDao;
 import chess.dao.PiecesDao;
 import chess.dao.UserDao;
+import chess.dao.initialboard.InitialBoard;
 import chess.domain.GameState;
 import chess.domain.board.Board;
 import chess.domain.board.Position;
@@ -36,7 +37,7 @@ public class ChessService {
             boardId = userDao.getBoard(exUserId);
         } catch (NoSuchElementException e) {
             e.printStackTrace();
-            boardId = boardDao.initBoard();
+            boardId = boardDao.initBoard(InitialBoard.getInitialPiecesIdAndLocation());
         }
         userDao.createUser(userName, boardId);
         return userDao.getUser(userName);
